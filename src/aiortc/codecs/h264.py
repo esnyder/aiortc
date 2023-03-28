@@ -137,7 +137,7 @@ def create_encoder_context(
         "tune": "zerolatency",  # does nothing using h264_omx
     }
     codec.open()
-    return codec, codec_name == "h264_omx"
+    return codec, codec_name == "h264_v4l2m2m"
 
 
 class H264Encoder(Encoder):
@@ -288,7 +288,7 @@ class H264Encoder(Encoder):
         if self.codec is None:
             try:
                 self.codec, self.codec_buffering = create_encoder_context(
-                    "h264_omx", frame.width, frame.height, bitrate=self.target_bitrate
+                    "h264_v4l2m2m", frame.width, frame.height, bitrate=self.target_bitrate
                 )
             except Exception:
                 self.codec, self.codec_buffering = create_encoder_context(
